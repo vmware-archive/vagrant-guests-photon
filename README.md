@@ -14,7 +14,7 @@ To build and install the plugin directly from this repo:
 
 ```
 $ rake build
-$ vagrant plugin install pkg/vagrant-guests-photon-1.0.0.gem
+$ vagrant plugin install pkg/vagrant-guests-photon-1.0.1.gem
 ```
 
 You can run RSpec with:
