@@ -36,11 +36,10 @@ module VagrantPlugins
 
         def self.configure_networks(machine, networks)
           machine.communicate.tap do |comm|
-            comm.sudo("rm -f /etc/systemd/network/50-vagrant-*.network")
 
             # Read network interface names
             interfaces = []
-            comm.sudo("ifconfig -a | grep '^eth' | cut -f1 -d' '") do |_, result|
+            comm.sudo("ifconfig -a | grep -E '^enp|^eth' | cut -f1 -d' '") do |_, result|
               interfaces = result.split("\n")
             end
 
@@ -54,9 +53,10 @@ module VagrantPlugins
                 next
               end
 
-              unit_name = "50-vagrant-%s.network" % [iface]
-
-              if network[:type] == :static
+              unit_name = find_network_file comm, iface
+              comm.sudo("rm -f /etc/systemd/network/#{unit_name}")
+              
+	      if network[:type] == :static
                 cidr = IPAddr.new(network[:netmask]).to_cidr
                 address = "%s/%s" % [network[:ip], cidr]
                 unit_file = STATIC_NETWORK % [iface, address]
@@ -77,6 +77,14 @@ module VagrantPlugins
 
             comm.sudo("systemctl restart systemd-networkd.service")
           end
+        end
+
+        def self.find_network_file(comm, iface)
+         comm.sudo("grep #{iface} /etc/systemd/network/* | awk -F\: '{print $1}' | head -n1") do |_, result|
+           puts result
+           return File.basename(result.strip)
+         end
+	 return "50-vagrant-%s.network" % [iface]	  
         end
       end
     end
