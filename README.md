@@ -1,4 +1,4 @@
-# vagrant-guests-photon
+# vagrant-guests-photon [![Build Status](https://travis-ci.org/vmware/vagrant-guests-photon.svg)](https://travis-ci.org/vmware/vagrant-guests-photon)
 
 This is a [Vagrant](http://www.vagrantup.com/) [plugin](http://docs.vagrantup.com/v2/plugins/index.html) that adds VMware Photon guest support.
 
