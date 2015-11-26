@@ -1,5 +1,7 @@
 # encoding: UTF-8
 # Copyright (c) 2015 VMware, Inc. All Rights Reserved.
+require 'coveralls'
+Coveralls.wear!
 
 shared_context 'machine' do
   let(:communicate) {

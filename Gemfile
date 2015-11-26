@@ -7,4 +7,5 @@ gemspec
 
 group :development do
   gem 'vagrant', :git => 'git://github.com/mitchellh/vagrant.git'
+  gem 'coveralls', require: false
 end
