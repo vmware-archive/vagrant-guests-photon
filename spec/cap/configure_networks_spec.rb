@@ -69,7 +69,7 @@ describe VagrantPlugins::GuestPhoton::Cap::ConfigureNetworks do
       communicate.should_receive(:sudo)
         .with("chown root:root /etc/systemd/network/50-vagrant-enp0s8.network")
       communicate.should_receive(:sudo)
-        .with("chmod +r /etc/systemd/network/50-vagrant-enp0s8.network")
+        .with("chmod a+r /etc/systemd/network/50-vagrant-enp0s8.network")
 
       # eth2
       communicate.should_receive(:sudo).with("grep eth2 /etc/systemd/network/* | awk -F: '{print $1}' | head -n1")
@@ -84,7 +84,7 @@ describe VagrantPlugins::GuestPhoton::Cap::ConfigureNetworks do
       communicate.should_receive(:sudo)
         .with("chown root:root /etc/systemd/network/50-vagrant-eth2.network")
       communicate.should_receive(:sudo)
-        .with("chmod +r /etc/systemd/network/50-vagrant-eth2.network")
+        .with("chmod a+r /etc/systemd/network/50-vagrant-eth2.network")
 
       # enp1s5
       communicate.should_receive(:sudo).with("grep enp1s5 /etc/systemd/network/* | awk -F: '{print $1}' | head -n1")
@@ -99,7 +99,7 @@ describe VagrantPlugins::GuestPhoton::Cap::ConfigureNetworks do
       communicate.should_receive(:sudo)
         .with("chown root:root /etc/systemd/network/50-vagrant-enp1s5.network")
       communicate.should_receive(:sudo)
-        .with("chmod +r /etc/systemd/network/50-vagrant-enp1s5.network")
+        .with("chmod a+r /etc/systemd/network/50-vagrant-enp1s5.network")
 
       # enp1s6
       communicate.should_receive(:sudo).with("grep enp1s6 /etc/systemd/network/* | awk -F: '{print $1}' | head -n1")
@@ -114,7 +114,7 @@ describe VagrantPlugins::GuestPhoton::Cap::ConfigureNetworks do
       communicate.should_receive(:sudo)
         .with("chown root:root /etc/systemd/network/50-vagrant-enp1s6.network")
       communicate.should_receive(:sudo)
-        .with("chmod +r /etc/systemd/network/50-vagrant-enp1s6.network")
+        .with("chmod a+r /etc/systemd/network/50-vagrant-enp1s6.network")
 
       communicate.should_receive(:sudo).with("systemctl restart systemd-networkd.service")
 
@@ -149,7 +149,7 @@ describe VagrantPlugins::GuestPhoton::Cap::ConfigureNetworks do
     before do
       communicate.stub(:sudo).with("ifconfig -a | grep -E '^enp|^eth' | cut -f1 -d' '")
         .and_yield(nil, interfaces)
-      @@logger = Log4r::Logger.new("vagrant::guest::photon::configure_networks") 
+      @@logger = Log4r::Logger.new("vagrant::guest::photon::configure_networks")
     end
 
     it 'should configure networks without enp0s9' do
@@ -168,7 +168,7 @@ describe VagrantPlugins::GuestPhoton::Cap::ConfigureNetworks do
       communicate.should_receive(:sudo)
         .with("chown root:root /etc/systemd/network/50-vagrant-enp0s8.network")
       communicate.should_receive(:sudo)
-        .with("chmod +r /etc/systemd/network/50-vagrant-enp0s8.network")
+        .with("chmod a+r /etc/systemd/network/50-vagrant-enp0s8.network")
 
       # eth2
       @@logger.should_receive(:warn).with(
