@@ -4,6 +4,6 @@
 module VagrantPlugins
   # Set version for vagrant-guests-photon gem.
   module GuestPhoton
-    VERSION = '1.0.2'
+    VERSION = '1.0.3'
   end
 end
