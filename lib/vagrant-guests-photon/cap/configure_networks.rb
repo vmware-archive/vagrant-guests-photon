@@ -55,7 +55,7 @@ module VagrantPlugins
 
               unit_name = find_network_file comm, iface
               comm.sudo("rm -f /etc/systemd/network/#{unit_name}")
-              
+
 	      if network[:type] == :static
                 cidr = IPAddr.new(network[:netmask]).to_cidr
                 address = "%s/%s" % [network[:ip], cidr]
@@ -72,7 +72,7 @@ module VagrantPlugins
               comm.upload(temp.path, "/tmp/#{unit_name}")
               comm.sudo("mv /tmp/#{unit_name} /etc/systemd/network/")
               comm.sudo("chown root:root /etc/systemd/network/#{unit_name}")
-              comm.sudo("chmod +r /etc/systemd/network/#{unit_name}")
+              comm.sudo("chmod a+r /etc/systemd/network/#{unit_name}")
             end
 
             comm.sudo("systemctl restart systemd-networkd.service")
@@ -84,7 +84,7 @@ module VagrantPlugins
            puts result
            return File.basename(result.strip)
          end
-	 return "50-vagrant-%s.network" % [iface]	  
+	 return "50-vagrant-%s.network" % [iface]
         end
       end
     end
