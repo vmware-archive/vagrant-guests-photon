@@ -7,8 +7,10 @@ module VagrantPlugins
       class ChangeHostName
         def self.change_host_name(machine, name)
           machine.communicate.tap do |comm|
-            unless comm.test("sudo hostname --fqdn | grep '#{name}'")
-              comm.sudo("hostname #{name.split('.')[0]}")
+            unless comm.test("hostnamectl --static | grep '#{name}'")
+              comm.sudo("rm /etc/machine-id")
+              comm.sudo("systemd-machine-id-setup")
+              comm.sudo("hostnamectl set-hostname #{name.split('.')[0]}")
             end
           end
         end
