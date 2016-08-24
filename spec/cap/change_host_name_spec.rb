@@ -9,8 +9,10 @@ describe VagrantPlugins::GuestPhoton::Cap::ChangeHostName do
 
   it 'should change hostname when hostname is differ from current' do
     hostname = 'vagrant-photon'
-    expect(communicate).to receive(:test).with("sudo hostname --fqdn | grep 'vagrant-photon'")
-    communicate.should_receive(:sudo).with("hostname #{hostname.split('.')[0]}")
+    expect(communicate).to receive(:test).with("hostnamectl --static | grep 'vagrant-photon'")
+    communicate.should_receive(:sudo).with("rm /etc/machine-id")
+    communicate.should_receive(:sudo).with("systemd-machine-id-setup")
+    communicate.should_receive(:sudo).with("hostnamectl set-hostname #{hostname.split('.')[0]}")
     described_class.change_host_name(machine, hostname)
   end
 
