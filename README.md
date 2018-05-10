@@ -3,22 +3,22 @@ This is a [Vagrant](http://www.vagrantup.com/) [plugin](http://docs.vagrantup.co
 
 ## Installation
 
-```
+```shell
 $ vagrant plugin install vagrant-guests-photon
 ```
 
 ## Development
 To build and install the plugin directly from this repo:
 
-```
+```shell
 $ bundle install
-$ bundle rake build
+$ bundle exec rake build
 $ vagrant plugin install pkg/vagrant-guests-photon-1.0.2.gem
 ```
 
 You can run RSpec with:
 
-```
+```shell
 $ bundle install
 $ bundle exec rake
 ```

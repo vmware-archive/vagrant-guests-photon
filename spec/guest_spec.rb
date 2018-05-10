@@ -8,7 +8,7 @@ describe VagrantPlugins::GuestPhoton::Guest do
   include_context 'machine'
 
   it 'should be detected with Photon' do
-    expect(communicate).to receive(:test).with("cat /etc/photon-release | grep 'VMware Photon Linux'")
+    expect(communicate).to receive(:test).with("grep 'VMware Photon' /etc/photon-release")
     guest.detect?(machine)
   end
 end

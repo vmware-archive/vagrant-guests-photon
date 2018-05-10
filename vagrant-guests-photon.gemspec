@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.description = 'Enables Vagrant to manage VMware Photon machines.'
 
   s.add_development_dependency 'bundler'
-  s.add_development_dependency 'rake'
+  s.add_development_dependency 'rake', '< 11.0'
   s.add_development_dependency 'rspec-core', '~> 2.14'
   s.add_development_dependency 'rspec-expectations', '~> 2.14'
   s.add_development_dependency 'rspec-mocks', '~> 2.14'
